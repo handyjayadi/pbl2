@@ -1,0 +1,541 @@
+/* Custom Fonts (Pastikan ini sesuai dengan yang ada di Tailwind Config Anda) */
+.font-hero {
+    font-family: 'Playfair Display', serif;
+}
+
+.font-body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Base Styles (TailwindCSS akan mengurus banyak ini, tapi bisa ditambahkan untuk override) */
+body {
+    background-color: #f5f5f5; /* Light gray background */
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s; /* Untuk transisi mode kontras */
+}
+
+/* Global Container / Padding */
+.p-8 {
+    padding: 2rem;
+}
+.pt-0 {
+    padding-top: 0;
+}
+
+/* NAVBAR */
+.navbar-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: 1.5rem 2rem;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.nav-link {
+    position: relative;
+    color: theme('colors.white'); /* Menggunakan warna dari tailwind.config.js */
+    font-weight: 500;
+}
+
+.nav-link:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #FFD700; /* Gold color fallback, replace with your actual accent color if different */
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover:after {
+    width: 100%;
+}
+
+/* HERO SECTION */
+.hero-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('../images/camping-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    margin-top: 5rem;
+}
+
+.header-main-text {
+    font-size: 4.5rem; /* 72px */
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+@media (max-width: 768px) {
+    .header-main-text {
+        font-size: 3rem; /* 48px */
+    }
+}
+
+.header-sub-text {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.625;
+    font-weight: 400;
+}
+
+/* BOOKING BOX */
+.booking-box {
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+    overflow: hidden;
+    padding: 0;
+}
+
+.booking-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.5rem 1.75rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.booking-item:last-child {
+    border-right: none;
+}
+
+/* Adjustments for small screens */
+@media (max-width: 767px) {
+    .booking-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .booking-item:last-of-type { /* Apply border to the last booking-item before the button */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .booking-button-wrapper button {
+        border-radius: 0 0 1rem 1rem !important; /* Round only bottom corners on small screens */
+    }
+}
+
+/* STAT ITEMS */
+.stat-item {
+    /* Styles are mostly in Tailwind classes in HTML */
+    transition: all 0.3s ease-in-out;
+}
+.stat-item:hover {
+    transform: translateY(-5px);
+}
+
+/* FASILITAS & REVIEWS SECTIONS (Common Card Styles) */
+.facility-card,
+.review-card,
+.topic-card {
+    /* Styles are mostly in Tailwind classes in HTML */
+    transition: all 0.3s ease-in-out;
+}
+.facility-card:hover,
+.review-card:hover,
+.topic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Halaman Spesifik Hero Images */
+.booking-hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), url('../images/booking-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    height: 70vh;
+    margin-top: 5rem;
+}
+
+.forum-hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), url('../images/forum-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    height: 70vh;
+    margin-top: 5rem;
+}
+
+.about-hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), url('../images/about-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    height: 70vh;
+    margin-top: 5rem;
+}
+
+.reviews-hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), url('../images/reviews-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    height: 70vh;
+    margin-top: 5rem;
+}
+
+/* ============================ */
+/* Gaya Aksesibilitas (BARU)     */
+/* ============================ */
+
+/* Skip Link */
+.skip-link {
+    position: absolute;
+    top: -40px; /* Hidden off-screen by default */
+    left: 0;
+    background: theme('colors.white');
+    color: white;
+    padding: 8px;
+    z-index: 999;
+    font-weight: bold;
+    border-radius: 0 0 8px 8px;
+    transition: top 0.3s ease; /* Smooth transition */
+}
+
+.skip-link:focus {
+    top: 0; /* Visible when focused */
+}
+
+/* Mobile Menu */
+#mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 40;
+}
+
+#mobile-menu.active {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    #mobile-menu {
+        position: static;
+        display: flex;
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0;
+    }
+}
+
+/* Chatbot and Accessibility Buttons */
+#chatbot-toggle, #accessibility-toggle {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 16px;
+}
+
+#chatbot-toggle {
+    right: 16px;
+}
+
+#accessibility-toggle {
+    left: 16px;
+}
+
+@media (min-width: 768px) {
+    #chatbot-toggle, #accessibility-toggle {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* Screen Reader Only - for visually hidden but still accessible content */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Mode Kontras Tinggi */
+body.high-contrast {
+    background-color: black !important;
+    color: white !important;
+}
+
+body.high-contrast .text-navbar-text,
+body.high-contrast .text-dark-text,
+body.high-contrast .text-gray-700,
+body.high-contrast .text-gray-600,
+body.high-contrast .text-gray-500 {
+    color: white !important;
+}
+
+body.high-contrast .bg-white {
+    background-color: #333 !important;
+    border: 1px solid white !important;
+    box-shadow: none !important;
+}
+
+body.high-contrast .bg-light-gray-bg {
+    background-color: #111 !important;
+    border: 1px solid #555 !important;
+    box-shadow: none !important;
+}
+
+body.high-contrast .border-gray-700 {
+    border-color: #aaa !important;
+}
+
+body.high-contrast .text-gold-accent,
+body.high-contrast .text-primary {
+    color: yellow !important; /* Agar bintang tetap terlihat */
+}
+
+body.high-contrast .nav-link {
+    color: white !important;
+}
+body.high-contrast .nav-link:after {
+    background-color: yellow !important;
+}
+
+body.high-contrast .booking-box {
+    background: rgba(0, 0, 0, 0.5) !important;
+    border: 1px solid white !important;
+    box-shadow: none !important;
+}
+
+body.high-contrast .booking-item {
+    border-right-color: rgba(255, 255, 255, 0.4) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+body.high-contrast .booking-item span,
+body.high-contrast .booking-item label {
+    color: white !important;
+}
+
+body.high-contrast .booking-item i {
+    color: white !important;
+}
+
+body.high-contrast .booking-button-wrapper button {
+    background-color: yellow !important;
+    color: black !important;
+}
+
+/* Input fields in high contrast mode */
+body.high-contrast input[type="text"],
+body.high-contrast input[type="email"],
+body.high-contrast input[type="tel"],
+body.high-contrast input[type="date"],
+body.high-contrast input[type="number"],
+body.high-contrast select,
+body.high-contrast textarea {
+    background-color: #555 !important;
+    color: white !important;
+    border-color: white !important;
+}
+body.high-contrast input::placeholder,
+body.high-contrast textarea::placeholder {
+    color: #ccc !important;
+}
+
+
+/* Adjust font sizes (handled by JS adding classes to body) */
+body.font-small {
+    font-size: 0.9em; /* 90% dari ukuran font default */
+}
+
+body.font-large {
+    font-size: 1.1em; /* 110% dari ukuran font default */
+}
+
+/* style.css (Tambahan untuk Chatbot UI) */
+
+.chatbot-container {
+    position: fixed;
+    bottom: var(--spacing-lg);
+    right: var(--spacing-lg);
+    width: 350px; /* Lebar chatbot */
+    height: 500px; /* Tinggi chatbot */
+    background-color: var(--white-color);
+    border: 1px solid var(--gray-300);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000; /* Pastikan chatbot di atas elemen lain */
+    display: none; /* Sembunyikan secara default */
+}
+
+.chatbot-container.active {
+    display: flex; /* Tampilkan saat aktif */
+}
+
+.chatbot-header {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: var(--spacing-md);
+    font-size: var(--font-size-lg);
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: var(--border-radius-lg);
+    border-top-right-radius: var(--border-radius-lg);
+}
+
+.chatbot-header h3 {
+    color: inherit; /* Menggunakan warna teks dari parent */
+    margin: 0;
+    font-size: var(--font-size-lg);
+}
+
+.chatbot-header .close-btn {
+    background: none;
+    border: none;
+    color: var(--white-color);
+    font-size: var(--font-size-lg);
+    cursor: pointer;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s ease;
+}
+
+.chatbot-header .close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.chatbot-messages {
+    flex-grow: 1;
+    padding: var(--spacing-md);
+    overflow-y: auto;
+    background-color: var(--gray-100);
+    display: flex;
+    flex-direction: column;
+}
+
+.message-bubble {
+    max-width: 80%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-sm);
+    word-wrap: break-word; /* Memastikan teks panjang pecah baris */
+}
+
+.message-bubble.user {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    align-self: flex-end; /* Posisikan ke kanan */
+}
+
+.message-bubble.bot {
+    background-color: var(--white-color);
+    color: var(--dark-color);
+    border: 1px solid var(--gray-300);
+    align-self: flex-start; /* Posisikan ke kiri */
+}
+
+.chatbot-input {
+    display: flex;
+    border-top: 1px solid var(--gray-300);
+    padding: var(--spacing-md);
+    background-color: var(--white-color);
+    gap: var(--spacing-sm);
+}
+
+.chatbot-input input[type="text"] {
+    flex-grow: 1;
+    border: 1px solid var(--gray-400);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-base);
+}
+
+.chatbot-input input[type="text"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.25);
+}
+
+.chatbot-input button {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.chatbot-input button:hover {
+    background-color: var(--dark-color);
+}
+
+/* Tombol buka chatbot */
+.open-chatbot-btn {
+    position: fixed;
+    bottom: var(--spacing-xl);
+    right: var(--spacing-xl);
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 50%; /* Membuat tombol bulat */
+    width: 60px;
+    height: 60px;
+    font-size: var(--font-size-lg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 999;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.open-chatbot-btn:hover {
+    background-color: var(--dark-color);
+    transform: scale(1.05);
+}
+
+/* CSS khusus untuk halaman booking, jika ada. Akan lebih baik jika dipindahkan ke style.css */
+        .booking-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), url('./assets/images/booking-bg.jpg'); /* Ganti dengan gambar hero booking Anda */
+            background-size: cover;
+            background-position: center;
+            border-radius: 1.5rem; /* Menjaga konsistensi dengan hero di index.html */
+            overflow: hidden;
+            height: 70vh; /* Ketinggian hero yang lebih pendek */
+            margin-top: 5rem; /* Margin dari navbar */
+            display: flex; /* Tambahkan flexbox */
+            align-items: center; /* Pusatkan vertikal */
+            justify-content: center; /* Pusatkan horizontal */
+            position: relative; /* Penting untuk z-index di dalam */
+        }
+        .booking-hero img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Pastikan gambar mengisi seluruh area */
+            z-index: 0; /* Pastikan gambar di belakang konten */
+        }
