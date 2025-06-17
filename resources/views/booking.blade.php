@@ -114,53 +114,5 @@
         </div>
     </main>
 
-    <button id="chatbot-toggle" class="fixed bottom-8 right-8 bg-primary text-white p-4 rounded-full shadow-lg hover:bg-primary-dark transition-colors duration-300 z-50 focus:outline-none focus:ring-4 focus:ring-primary focus:ring-opacity-50" aria-label="Buka Chatbot">
-        <i class="fas fa-comments text-2xl"></i>
-    </button>
-
-    <div id="chatbot-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100]" style="display: none;">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-sm flex flex-col h-3/4 max-h-[600px]">
-            <div class="flex justify-between items-center bg-primary text-white p-4 rounded-t-lg">
-                <h3 class="text-xl font-bold">Chatbot CampHarmoni</h3>
-                <button id="chatbot-close" class="text-white hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-white rounded-full p-1" aria-label="Tutup Chatbot">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            <div class="flex-1 p-4 overflow-y-auto text-gray-800" id="chat-messages">
-                <div class="bg-gray-100 p-3 rounded-lg mb-2 mr-auto max-w-[80%]">Halo! Ada yang bisa kami bantu?</div>
-            </div>
-            <div class="p-4 border-t border-gray-200 flex">
-                <input type="text" id="chat-input" class="flex-1 border border-gray-300 rounded-l-lg p-3 focus:outline-none focus:border-primary" placeholder="Ketik pesan Anda...">
-                <button id="chat-send" class="bg-primary text-white p-3 rounded-r-lg hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50" aria-label="Kirim Pesan">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <button id="accessibility-toggle" class="fixed bottom-8 left-8 bg-gray-700 text-white p-4 rounded-full shadow-lg hover:bg-gray-800 transition-colors duration-300 z-50 focus:outline-none focus:ring-4 focus:ring-gray-700 focus:ring-opacity-50" aria-label="Pengaturan Aksesibilitas">
-        <i class="fas fa-universal-access text-2xl"></i>
-    </button>
-
-    <div id="accessibility-panel" class="fixed bottom-24 left-8 bg-white rounded-lg shadow-xl p-6 w-72 z-50 hidden">
-        <h4 class="text-lg font-bold mb-4 text-dark-text">Pengaturan Aksesibilitas</h4>
-        <div class="space-y-4">
-            <div>
-                <label for="contrast-toggle" class="block text-gray-700 font-medium mb-2">Mode Kontras Tinggi</label>
-                <input type="checkbox" id="contrast-toggle" class="h-5 w-5 text-primary rounded border-gray-300 focus:ring-primary">
-            </div>
-            <div>
-                <label class="block text-gray-700 font-medium mb-2">Ukuran Font</label>
-                <div class="flex space-x-2">
-                    <button id="font-small" class="bg-gray-200 text-gray-700 px-3 py-1 rounded-md hover:bg-gray-300 transition-colors duration-200" aria-label="Ukuran Font Kecil">A-</button>
-                    <button id="font-normal" class="bg-gray-200 text-gray-700 px-3 py-1 rounded-md hover:bg-gray-300 transition-colors duration-200" aria-label="Ukuran Font Normal">A</button>
-                    <button id="font-large" class="bg-gray-200 text-gray-700 px-3 py-1 rounded-md hover:bg-gray-300 transition-colors duration-200" aria-label="Ukuran Font Besar">A+</button>
-                </div>
-            </div>
-        </div>
-        <button id="accessibility-close" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-300 rounded-full p-1" aria-label="Tutup Pengaturan Aksesibilitas">
-            <i class="fas fa-times text-xl"></i>
-        </button>
-    </div>
-
+    
 @include('templates.footer')

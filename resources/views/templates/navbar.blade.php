@@ -28,10 +28,10 @@
             <div class="hidden md:flex gap-6 md:gap-10 items-center">
                 <a href="{{route('homepage')}}" class="nav-link transition duration-300">Beranda</a> 
                 <a href="{{route('booking')}}" class="nav-link transition duration-300">Pesan</a>
+                <a href="{{route('tenda.user')}}" class="nav-link transition duration-300">Tenda</a>
                 <a href="{{route('gallery')}}" class="nav-link transition duration-300">Gallery</a>
                 <a href="{{ route('review') }}" class="nav-link transition duration-300">Ulasan</a>
                 <a href="{{route('about')}}" class="nav-link transition duration-300">Tentang Kami</a>
-                <!-- Pindahkan tombol Sign up ke dalam div ini -->
             </div>
             @guest
             <a href="{{route('login')}}" class="hidden md:block bg-primary hover:bg-primary-dark text-white px-6 py-2 md:px-8 md:py-3 rounded-full font-medium tracking-wide transition-all duration-300 transform hover:scale-105 shadow-lg">
@@ -56,6 +56,9 @@
                             @csrf
                             <button type="submit" class="w-full text-left px-4 py-2 hover:bg-gray-100">Logout</button>
                         </form>
+                        @if (Auth::check() && (Auth::user()->role === 'admin'))
+                         <a href="{{ route('adminDashboard') }}" class="block px-4 py-2 hover:bg-gray-100">Admin</a>
+                         @endif
                     </div>
                 </div>
             @endauth

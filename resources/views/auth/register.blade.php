@@ -77,6 +77,10 @@
                 </span>
             </div>
 
+            <!-- Tambahkan ini sebelum tombol Register -->
+            <input type="hidden" name="role" value="user">
+
+
             <button type="submit" class="w-full bg-white text-purple-800 font-bold py-3 rounded-full hover:bg-opacity-90 transition duration-300 text-lg">
                 Register
             </button>

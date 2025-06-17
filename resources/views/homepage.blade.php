@@ -15,36 +15,17 @@
                             Discover pure luxury in every corner of our CampHarmoni.
                         </p>
 
-                        <div class="booking-box rounded-xl w-full max-w-4xl mx-auto border border-white border-opacity-90 bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm p-4 md:p-6 shadow-md">
-                            <div class="grid grid-cols-1 md:grid-cols-4 items-stretch gap-2">
-                                <div class="booking-item">
-                                    <label class="text-gray-300 text-xs font-medium tracking-wider mb-1 block">Check In</label>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-calendar-alt text-gray-400 mr-2 text-xs"></i>
-                                        <span class="text-white font-medium text-sm">Sun, 20 Mar 2025</span>
-                                    </div>
+                        <div class="rounded-xl w-full max-w-4xl mx-auto">
+                            <form id="bookingForm" action="{{ route('booking') }}" method="GET">
+                                <div class="flex justify-center items-center">
+                                    
+                                    <button type="submit" class="group rounded-full bg-white flex items-center justify-center text-teal-700 text-lg font-semibold tracking-wider transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl shadow-lg py-4 px-10">
+                                        <span>Pesan Sekarang</span>
+                                        <i class="fas fa-arrow-right ml-3 transition-transform duration-300 group-hover:translate-x-2"></i>
+                                    </button>
+                                    
                                 </div>
-                                <div class="booking-item">
-                                    <label class="text-gray-300 text-xs font-medium tracking-wider mb-1 block">Check Out</label>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-calendar-alt text-gray-400 mr-2 text-xs"></i>
-                                        <span class="text-white font-medium text-sm">Mon, 21 Mar 2025</span>
-                                    </div>
-                                </div>
-                                <div class="booking-item">
-                                    <label class="text-gray-300 text-xs font-medium tracking-wider mb-1 block">Guest</label>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-user text-gray-400 mr-2 text-xs"></i>
-                                        <span class="text-white font-medium text-sm">2 Adults</span>
-                                        <i class="fas fa-chevron-down text-gray-400 ml-auto text-xs"></i>
-                                    </div>
-                                </div>
-                                <div class="booking-button-wrapper">
-                                    <a href="{{ route('booking') }}" class="w-full h-full rounded-lg bg-white flex items-center justify-center text-book-now-green text-base font-bold tracking-wide transition-all duration-300 hover:scale-[1.02] shadow-sm py-3 px-4">
-                                        Book Now
-                                    </a>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -72,8 +53,45 @@
                     </div>
                 </div>
             </section>
-
-            <!-- FASILITAS SECTION -->
+            
+            <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10 w-full mt-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold font-hero text-primary mb-6 drop-shadow-lg tracking-tight text-center">
+                    Tenda & Akomodasi Pilihan Kami
+                </h2>
+                <p class="text-lg md:text-xl text-gray-600 mb-14 max-w-2xl mx-auto font-light text-center">
+                    Pilih akomodasi yang paling sesuai dengan gaya petualangan Anda, dari tenda mewah hingga suite keluarga.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
+                    @foreach ($tenda as $index => $item)
+                    <!-- Card 1-->
+                    <div class="accommodation-card bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 border border-gray-100 group relative">
+                        <div class="relative">
+                            <img src="{{ asset('storage/' . $item->foto) }}" alt="Tenda Deluxe" class="w-full h-64 object-cover group-hover:brightness-95 transition duration-300">
+                        </div>
+                        <div class="p-6 text-left">
+                            <h3 class="text-xl font-bold text-primary mb-3">{{$item->nama}}</h3>
+                            <p class="text-gray-500 text-sm mb-5 leading-relaxed">
+                                {{$item->deskripsi}}
+                            </p>
+                            <div class="flex justify-between items-center pt-4 pb-0 border-t border-gray-100">
+                                <div>
+                                    <span class="text-lg font-bold text-primary">{{ number_format($item->harga) }}</span>
+                                    <span class="text-xs text-gray-400 block">per malam</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     @endforeach
+                </div>
+               
+                <!-- Tombol Lihat Selengkapnya -->
+                <div class="flex justify-center mt-10">
+                    <a href="{{ route('tenda.user') }}" class="bg-primary text-white px-8 py-3 rounded-full font-bold text-lg shadow-lg hover:bg-primary-dark transition-all duration-300">
+                        Lihat Selengkapnya
+                    </a>
+                </div>
+            </div>      <!-- FASILITAS SECTION -->
             <section class="py-12 md:py-16 bg-light-gray-bg text-center rounded-xl shadow-lg mt-8 mx-4 md:mx-0">
                 <div class="max-w-6xl mx-auto px-4 md:px-6">
                     <h2 class="text-2xl md:text-4xl font-bold font-hero text-dark-text mb-4">Fasilitas Unggulan Kami</h2>
@@ -232,56 +250,6 @@
 
     
 
-    <!-- CHATBOT BUTTON -->
-    <button id="chatbot-toggle" class="fixed bottom-8 right-8 bg-primary text-white p-4 rounded-full shadow-lg hover:bg-primary-dark transition-colors duration-300 z-50 focus:outline-none focus:ring-4 focus:ring-primary focus:ring-opacity-50" aria-label="Buka Chatbot">
-        <i class="fas fa-comments text-2xl"></i>
-    </button>
-
-    <!-- CHATBOT MODAL -->
-    <div id="chatbot-modal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-[100] hidden">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-sm flex flex-col h-3/4 max-h-[600px]">
-            <div class="flex justify-between items-center bg-primary text-white p-4 rounded-t-lg">
-                <h3 class="text-xl font-bold">Chatbot CampHarmoni</h3>
-                <button id="chatbot-close" class="text-white hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-white rounded-full p-1" aria-label="Tutup Chatbot">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            <div class="flex-1 p-4 overflow-y-auto text-gray-800" id="chat-messages">
-                </div>
-            <div class="p-4 border-t border-gray-200 flex">
-                <input type="text" id="chat-input" class="flex-1 border border-gray-300 rounded-l-lg p-3 focus:outline-none focus:border-primary" placeholder="Ketik pesan Anda...">
-                <button id="chat-send" class="bg-primary text-white p-3 rounded-r-lg hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50" aria-label="Kirim Pesan">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ACCESSIBILITY BUTTON -->
-    <button id="accessibility-toggle" class="fixed bottom-8 left-8 bg-gray-700 text-white p-4 rounded-full shadow-lg hover:bg-gray-800 transition-colors duration-300 z-50 focus:outline-none focus:ring-4 focus:ring-gray-700 focus:ring-opacity-50" aria-label="Pengaturan Aksesibilitas">
-        <i class="fas fa-universal-access text-2xl"></i>
-    </button>
-
-    <!-- ACCESSIBILITY MODAL -->
-    <div id="accessibility-panel" class="fixed bottom-24 left-8 bg-white rounded-lg shadow-xl p-6 w-72 z-50 hidden">
-        <h4 class="text-lg font-bold mb-4 text-dark-text">Pengaturan Aksesibilitas</h4>
-        <div class="space-y-4">
-            <div>
-                <label for="contrast-toggle" class="block text-gray-700 font-medium mb-2">Mode Kontras Tinggi</label>
-                <input type="checkbox" id="contrast-toggle" class="h-5 w-5 text-primary rounded border-gray-300 focus:ring-primary">
-            </div>
-            <div>
-                <label class="block text-gray-700 font-medium mb-2">Ukuran Font</label>
-                <div class="flex space-x-2">
-                    <button id="font-small" class="bg-gray-200 text-gray-700 px-3 py-1 rounded-md hover:bg-gray-300 transition-colors duration-200" aria-label="Ukuran Font Kecil">A-</button>
-                    <button id="font-normal" class="bg-gray-200 text-gray-700 px-3 py-1 rounded-md hover:bg-gray-300 transition-colors duration-200" aria-label="Ukuran Font Normal">A</button>
-                    <button id="font-large" class="bg-gray-200 text-gray-700 px-3 py-1 rounded-md hover:bg-gray-300 transition-colors duration-200" aria-label="Ukuran Font Besar">A+</button>
-                </div>
-            </div>
-        </div>
-        <button id="accessibility-close" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-300 rounded-full p-1" aria-label="Tutup Pengaturan Aksesibilitas">
-            <i class="fas fa-times text-xl"></i>
-        </button>
-    </div>
+    
  @include('templates.footer') 
     

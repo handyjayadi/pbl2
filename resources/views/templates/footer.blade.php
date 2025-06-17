@@ -1,3 +1,108 @@
+<!-- CHATBOT BUTTON -->
+            <button id="chatbot-toggle" class="fixed bottom-8 right-8 bg-primary text-white p-4 rounded-full shadow-lg hover:bg-primary-dark transition-colors duration-300 z-50 focus:outline-none focus:ring-4 focus:ring-primary focus:ring-opacity-50" aria-label="Buka Chatbot">
+                <i class="fas fa-comments text-2xl"></i>
+            </button>
+
+            <!-- CHATBOT MODAL -->
+            <div id="chatbot-modal" class="fixed bottom-24 right-8 z-[100] hidden">
+                <div class="bg-white rounded-lg shadow-xl w-80 flex flex-col h-[480px] max-h-[600px]">
+                    <div class="flex justify-between items-center bg-primary text-white p-4 rounded-t-lg">
+                        <h3 class="text-xl font-bold">Chatbot CampHarmoni</h3>
+                        <button id="chatbot-close" class="text-white hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-white rounded-full p-1" aria-label="Tutup Chatbot">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="flex-1 p-4 overflow-y-auto text-gray-800" id="chat-messages">
+                    </div>
+                    <div class="p-4 border-t border-gray-200 flex">
+                        <input type="text" id="chat-input" class="flex-1 border border-gray-300 rounded-l-lg p-3 focus:outline-none focus:border-primary" placeholder="Ketik pesan Anda...">
+                        <button id="chat-send" class="bg-primary text-white p-3 rounded-r-lg hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50" aria-label="Kirim Pesan">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- ACCESSIBILITY BUTTON -->
+    <button id="accessibility-toggle" class="fixed bottom-8 left-8 bg-gray-700 text-white p-4 rounded-full shadow-lg hover:bg-gray-800 transition-colors duration-300 z-50 focus:outline-none focus:ring-4 focus:ring-gray-700 focus:ring-opacity-50" aria-label="Pengaturan Aksesibilitas">
+        <i class="fas fa-universal-access text-2xl"></i>
+    </button>
+
+    <!-- ACCESSIBILITY MODAL -->
+    <div id="accessibility-panel" class="fixed bottom-24 left-8 bg-white rounded-xl shadow-2xl p-6 w-80 z-50 hidden border border-gray-100 transform transition-all duration-300 ease-in-out">
+        <div class="flex justify-between items-center mb-5">
+            <h4 class="text-xl font-bold text-primary flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                Pengaturan Aksesibilitas
+            </h4>
+            <button id="accessibility-close" class="text-gray-400 hover:text-gray-600 transition-colors duration-200" aria-label="Tutup Pengaturan Aksesibilitas">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="space-y-6">
+            <!-- High Contrast Toggle -->
+            <div class="flex items-center justify-between">
+                <div>
+                    <label for="contrast-toggle" class="block text-gray-700 font-medium mb-1">Mode Kontras Tinggi</label>
+                    <p class="text-sm text-gray-500">Tingkatkan visibilitas teks</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="contrast-toggle" class="sr-only peer">
+                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                </label>
+            </div>
+
+            <!-- Font Size Controls -->
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">Ukuran Font</label>
+                <div class="flex space-x-3">
+                    <button id="font-small" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition-all duration-200 flex items-center justify-center" aria-label="Ukuran Font Kecil">
+                        <span class="text-sm font-bold">A-</span>
+                    </button>
+                    <button id="font-normal" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition-all duration-200 flex items-center justify-center border-2 border-primary" aria-label="Ukuran Font Normal">
+                        <span class="text-base font-bold">A</span>
+                    </button>
+                    <button id="font-large" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition-all duration-200 flex items-center justify-center" aria-label="Ukuran Font Besar">
+                        <span class="text-lg font-bold">A+</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-gray-100">
+            <button id="reset-accessibility" class="text-sm text-primary hover:text-primary-dark font-medium flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Reset Pengaturan
+            </button>
+        </div>
+    </div>
+
+            <script>
+                // Chatbot toggle
+                document.getElementById('chatbot-toggle').addEventListener('click', function() {
+                    document.getElementById('chatbot-modal').classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                });
+                document.getElementById('chatbot-close').addEventListener('click', function() {
+                    document.getElementById('chatbot-modal').classList.add('hidden');
+                    document.body.style.overflow = '';
+                });
+                // Optional: close modal on click outside
+                document.addEventListener('mousedown', function(e) {
+                    const modal = document.getElementById('chatbot-modal');
+                    const btn = document.getElementById('chatbot-toggle');
+                    if (!modal.classList.contains('hidden') && !modal.contains(e.target) && e.target !== btn) {
+                        modal.classList.add('hidden');
+                        document.body.style.overflow = '';
+                    }
+                });
+            </script>
 <!-- FOOTER -->
     <footer class="bg-dark-text py-12 md:py-16 text-gray-300 px-4 md:px-0">
         <div class="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
