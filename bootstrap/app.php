@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Contracts\Console\Kernel as ConsoleKernel;
+use App\Schedule\Kernel as ScheduleKernel;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -11,8 +13,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        // Tambahkan middleware jika perlu
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
-    })->create();
+        // Tangani exception jika perlu
+    })
+    ->withBindings([
+    Illuminate\Contracts\Console\Kernel::class => App\Schedule\Kernel::class,
+    ])
+    ->create();

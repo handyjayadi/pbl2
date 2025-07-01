@@ -5,15 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\TendaController;
 use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\homepageController;
 use App\Http\Controllers\AktivitasController;
 
 
 
-Route::get('/booking', function () {
-    return view('booking');
-})->name('booking');
 
 
 Route::get('/review', function () {
@@ -67,6 +65,20 @@ Route::middleware(['auth',RoleMiddleware::class . ':admin',])->group(function ()
     Route::get('/gallery', [GaleriController::class, 'galeriuser'])->name('gallery');
 
     Route::get('/', [homepageController::class, 'index'])->name('homepage');
+
+    
+
+    // Route::get('/booking', [BookingController::class, 'form']);
+    // Route::post('/booking', [BookingController::class, 'store']);
+    // Route::post('/payment-callback', [BookingController::class, 'midtransCallback']);
+
+
+
+Route::post('/booking/checkout', [BookingController::class, 'checkout'])->name('booking.checkout');
+Route::get('/booking/success', [BookingController::class, 'paymentSuccess'])->name('booking.success');
+Route::get('/booking', [BookingController::class, 'index'])->name('booking');
+
+
 
 
 require __DIR__.'/auth.php';

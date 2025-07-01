@@ -35,4 +35,13 @@ return [
         ],
     ],
 
+    'midtrans' => [
+    'serverKey'     => env('SB-Mid-server-a8bzBfFTZCYpfNAVWZv3hGZJ'),
+    'clientKey'     => env('SB-Mid-client-vFP-dwHvkoV9tGqx'),
+    'isProduction'  => false, // true untuk production
+    'isSanitized'   => true,
+    'is3ds'         => true,
+    ],
+
+
 ];
