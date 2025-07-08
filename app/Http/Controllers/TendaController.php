@@ -9,8 +9,8 @@ class TendaController extends Controller
 {
     public function index()
     {
-        $tenda = Tenda::latest()->get();
-        return view('admin.tendaCrud', compact('tenda'));
+         $tenda = Tenda::latest()->paginate(3);
+    return view('admin.tendaCrud', compact('tenda'));
     }
 
      public function tenda()
@@ -27,6 +27,7 @@ class TendaController extends Controller
             'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
             'stok' => 'required|integer',
             'harga' => 'required|integer',
+            'kapasitas' => 'required|integer',
         ]);
 
         $foto = $request->file('foto')->store('tendas', 'public');
@@ -37,6 +38,7 @@ class TendaController extends Controller
             'foto' => $foto,
             'stok' => $request->stok,
             'harga' => $request->harga,
+            'kapasitas' => $request->harga,
         ]);
 
         return back();
@@ -51,6 +53,7 @@ class TendaController extends Controller
             'deskripsi' => 'required',
             'stok' => 'required|integer',
             'harga' => 'required|integer',
+            'kapasitas' => 'required|integer',
         ]);
 
         if ($request->hasFile('foto')) {

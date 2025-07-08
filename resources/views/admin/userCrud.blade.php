@@ -26,7 +26,7 @@
       <tbody>
         @foreach ($users as $user)
         <tr class="border-b dark:border-gray-700 text-gray-800 dark:text-gray-300">
-          <td class="px-4 py-2">{{ $index = +1 }}</td>
+          <td class="px-4 py-2">{{ $loop->iteration }}</td>
           <td class="px-4 py-2">{{ $user->name }}</td>
           <td class="px-4 py-2">{{ $user->email }}</td>
           <td class="px-4 py-2">{{ $user->role }}</td>
@@ -67,6 +67,7 @@
       <select name="role" id="role" class="w-full px-2 py-2 mb-4 border-b border-gray-400 bg-transparent focus:outline-none" required>
         <option value="admin">Admin</option>
         <option value="user">User</option>
+        <option value="owner">Owner</option>
       </select>
 
       <div class="flex justify-end space-x-2">

@@ -17,8 +17,8 @@
 
     
 <!-- NAVBAR -->
-    <div class="navbar-container">
-        <nav class="flex justify-between items-center text-navbar-text p-4 md:p-0">
+    <div class="navbar-container mb-10 pb-10">
+        <nav class="flex justify-between items-center text-navbar-text p-4 md:p-0 mb-10 pb-10">
             <div class="text-2xl md:text-3xl font-bold font-hero tracking-wider">PohonSurgaCamp</div>
             
             <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none" aria-label="Toggle mobile menu">
@@ -32,6 +32,9 @@
                 <a href="{{route('gallery')}}" class="nav-link transition duration-300">Gallery</a>
                 <a href="{{ route('review') }}" class="nav-link transition duration-300">Ulasan</a>
                 <a href="{{route('about')}}" class="nav-link transition duration-300">Tentang Kami</a>
+                @auth
+                <a href="{{route('booking.history')}}" class="nav-link transition duration-300">History Pesanan</a>
+                @endauth
             </div>
             @guest
             <a href="{{route('login')}}" class="hidden md:block bg-primary hover:bg-primary-dark text-white px-6 py-2 md:px-8 md:py-3 rounded-full font-medium tracking-wide transition-all duration-300 transform hover:scale-105 shadow-lg">
@@ -43,22 +46,22 @@
     <!-- Dropdown user untuk user yang login -->
                 <div class="relative hidden md:block">
                     <button id="userDropdownBtn" class="flex items-center space-x-2 bg-primary text-white px-4 py-2 rounded-full focus:outline-none hover:bg-primary-dark">
-                        <span>{{ Auth::user()->name }}</span>
+                        <span class="whitespace-nowrap overflow-hidden text-ellipsis max-w-[60px] block">{{ \Illuminate\Support\Str::words(Auth::user()->name,2,'...')}}</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
 
                     <!-- Dropdown content -->
                     <div id="userDropdown" class="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-lg py-2 hidden z-50">
                         <a href="{{ route('profile.edit') }}" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
-
+                         @if (Auth::check() && (Auth::user()->role === 'admin'))
+                         <a href="{{ route('adminDashboard') }}" class="block px-4 py-2 hover:bg-gray-100">Admin</a>
+                         @endif
                         <!-- Logout form -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="w-full text-left px-4 py-2 hover:bg-gray-100">Logout</button>
+                            <button type="submit" class="w-full text-left px-4 py-2 text-white bg-red-600">Logout</button>
                         </form>
-                        @if (Auth::check() && (Auth::user()->role === 'admin'))
-                         <a href="{{ route('adminDashboard') }}" class="block px-4 py-2 hover:bg-gray-100">Admin</a>
-                         @endif
+                       
                     </div>
                 </div>
             @endauth
@@ -79,9 +82,29 @@
                 <a href="{{route('gallery')}}" class="nav-link text-xl text-gray-800 hover:text-primary transition duration-300 w-full py-2">Gallery</a>
                 <a href="{{ route('review') }}" class="nav-link text-xl text-gray-800 hover:text-primary transition duration-300 w-full py-2">Ulasan</a>
                 <a href="{{route('about')}}" class="nav-link text-xl text-gray-800 hover:text-primary transition duration-300 w-full py-2">Tentang Kami</a>
-                <a href="#" class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-full font-medium tracking-wide transition-all duration-300 transform hover:scale-105 shadow-lg w-full text-center mt-4">
-                    Sign up
-                </a>
+                 @guest
+    <a href="{{route('login')}}" class="block md:hidden bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-full font-medium tracking-wide transition-all duration-300 transform hover:scale-105 shadow-lg w-full text-center">
+        Sign up
+    </a>
+@endguest
+
+@auth
+    <div class="block md:hidden w-full mt-4">
+        <div class="bg-primary text-white px-4 py-3 rounded-lg flex items-center justify-between">
+            <span class="font-semibold text-sm truncate">{{ \Illuminate\Support\Str::words(Auth::user()->name, 2, '...') }}</span>
+        </div>
+        <div class="bg-white mt-2 rounded-lg shadow-md">
+            <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+            @if (Auth::check() && Auth::user()->role === 'admin')
+            <a href="{{ route('adminDashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Admin</a>
+            @endif
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-white bg-red-600">Logout</button>
+            </form>
+        </div>
+    </div>
+@endauth
             </nav>
         </div>
     </div>

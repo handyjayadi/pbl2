@@ -51,7 +51,7 @@
 
             <div class="mb-6 relative">
                 <label for="password" class="block text-lg mb-2 opacity-80">Password</label>
-                <input type="password" name="password" class="w-full p-3 bg-transparent border-b-2 border-white focus:outline-none focus:border-opacity-100 placeholder-white placeholder-opacity-70 text-lg pr-10" placeholder="******">
+                <input type="password" id="password" name="password" class="w-full p-3 bg-transparent border-b-2 border-white focus:outline-none focus:border-opacity-100 placeholder-white placeholder-opacity-70 text-lg pr-10" placeholder="******">
                 <span class="absolute inset-y-0 right-0 top-7 pr-3 flex items-center cursor-pointer" onclick="togglePasswordVisibility('password')">
                     <svg id="eye-open-password" class="h-6 w-6 text-white opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -76,11 +76,8 @@
                     </svg>
                 </span>
             </div>
-
             <!-- Tambahkan ini sebelum tombol Register -->
             <input type="hidden" name="role" value="user">
-
-
             <button type="submit" class="w-full bg-white text-purple-800 font-bold py-3 rounded-full hover:bg-opacity-90 transition duration-300 text-lg">
                 Register
             </button>
@@ -88,7 +85,7 @@
         </form>
 
         <p class="text-center mt-8 text-white text-sm md:text-base opacity-80">
-            Already have an account? <a href="login.html" class="text-white hover:underline font-semibold">Login</a>
+            Already have an account? <a href="{{ route("login") }}" class="text-white hover:underline font-semibold">Login</a>
         </p>
     </div>
 

@@ -3,20 +3,21 @@
 use App\Http\Controllers\userCruds;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TendaController;
 use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\homepageController;
+use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\AktivitasController;
 
 
 
 
 
-Route::get('/review', function () {
-    return view('review');
-})->name('review');
+
 
 Route::get('/about', function () {
     return view('about');
@@ -51,12 +52,21 @@ Route::middleware(['auth',RoleMiddleware::class . ':admin',])->group(function ()
     Route::resource('galeri', GaleriController::class)->except(['create', 'edit', 'show']);
     });
 
-Route::middleware(['auth',RoleMiddleware::class . ':admin',])->group(function () {
-    Route::get('/admin', function () {
-        return view('admin.adminUtama');})->name('adminDashboard');
-        
+    Route::middleware(['auth',RoleMiddleware::class . ':admin',])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('adminDashboard');
     Route::resource('tendas', TendaController::class)->except(['create', 'edit', 'show']);
     Route::get('/tenda', [TendaController::class, 'index'])->name('tenda.index');
+    });
+
+    Route::middleware('auth')->group(function () {
+    Route::get('/ulasan/{booking}', [UlasanController::class, 'create'])->name('ulasan.create');
+    Route::post('/ulasan', [UlasanController::class, 'store'])->name('ulasan.store');
+    }); 
+
+    Route::get('/review', [UlasanController::class, 'index'])->name('review');
+    Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/reviews', [UlasanController::class, 'indexadmin'])->name('admin.reviewManagement');
+    Route::delete('/reviews/{id}', [UlasanController::class, 'destroy'])->name('admin.reviews.destroy');
     });
 
 
@@ -66,18 +76,31 @@ Route::middleware(['auth',RoleMiddleware::class . ':admin',])->group(function ()
 
     Route::get('/', [homepageController::class, 'index'])->name('homepage');
 
+
+Route::middleware(['auth'])->group(function () {
+   
+    Route::post('/booking/checkout', [BookingController::class, 'checkout'])->name('booking.checkout');
+    Route::get('/booking/success', [BookingController::class, 'paymentSuccess'])->name('booking.success');
+    Route::get('/booking/history', [BookingController::class, 'history'])->name('booking.history');
+    Route::post('/get-snap-token', [BookingController::class, 'getSnapToken']);
+    Route::get('/admin/transaksi', [BookingController::class, 'admin'])->name('admin.bookManagement');
+
+
+        
+    });
+    Route::get('/booking', [BookingController::class, 'index'])->name('booking');
+
+
     
 
-    // Route::get('/booking', [BookingController::class, 'form']);
-    // Route::post('/booking', [BookingController::class, 'store']);
-    // Route::post('/payment-callback', [BookingController::class, 'midtransCallback']);
 
+    // routes/web.php
+        use Illuminate\Support\Facades\Log;
 
-
-Route::post('/booking/checkout', [BookingController::class, 'checkout'])->name('booking.checkout');
-Route::get('/booking/success', [BookingController::class, 'paymentSuccess'])->name('booking.success');
-Route::get('/booking', [BookingController::class, 'index'])->name('booking');
-
+        Route::get('/test-log', function () {
+            Log::debug('Ini debug dari test-log');
+            return 'Cek log';
+        });
 
 
 

@@ -19,10 +19,7 @@
                 <p class="text-xl md:text-2xl text-white/90 mb-6 animate-fade-in">
                     Rencanakan kunjungan Anda sekarang dan nikmati pengalaman camping mewah yang tak terlupakan.
                 </p>
-                <a href="#booking-form" class="inline-block bg-white text-primary hover:bg-gray-50 px-8 py-3 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    Lihat Lebih Banyak
-                    <i class="fas fa-arrow-down ml-2"></i>
-                </a>
+                
             </div>
         </section>
 
@@ -34,39 +31,39 @@
                 Pilih akomodasi yang paling sesuai dengan gaya petualangan Anda, dari tenda mewah hingga suite keluarga.
             </p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12">
-                <!-- Card 1 -->
-                 @foreach ($tenda as $index => $item)
-                <div class="accommodation-card bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 border border-gray-100 group relative">
-                    <div class="relative">
-                        <img src="{{ asset('storage/' . $item->foto) }}" alt="Tenda Deluxe" class="w-full h-64 object-cover group-hover:brightness-95 transition duration-300">
-                    </div>
-                    
-                    <div class="p-6 text-left">
-                        <h3 class="text-xl font-bold text-primary mb-3">{{ $item->nama }}</h3>
-                        <p class="text-gray-500 text-sm mb-5 leading-relaxed">
-                           {{ $item->deskripsi }}
-                        </p>
-                        
-                        <div class="flex justify-between items-center pt-4 pb-0 border-t border-gray-100">
-                            <div>
-                                <span class="text-lg font-bold text-primary">Rp{{ number_format($item->harga) }}</span>
-                                <span class="text-xs text-gray-400 block">per malam</span>
-                            </div>
-                            <button class="group flex items-center rounded-full bg-primary text-white text-xs font-medium tracking-wide transition-all duration-200 hover:from-teal-700 hover:to-teal-800 px-5 py-2.5">
-                                <span>pesan</span>
-                                <i class="fas fa-chevron-right ml-2 text-[0.65rem] transition-transform duration-200 group-hover:translate-x-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-                
-               
-              
-                
-
+           <div class="overflow-x-auto">
+    <div class="flex space-x-6 w-max">
+        @foreach ($tenda as $item)
+        <div class="accommodation-card min-w-[280px] max-w-xs bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 border border-gray-100 group relative">
+            <div class="relative">
+                <img src="{{ asset('storage/' . $item->foto) }}" alt="Tenda Deluxe" class="w-full h-64 object-cover group-hover:brightness-95 transition duration-300">
             </div>
+            
+            <div class="p-6 text-left">
+                <h3 class="text-xl font-bold text-primary mb-3">{{ $item->nama }}</h3>
+                <p class="text-gray-500 text-sm mb-5 leading-relaxed">
+                   {{ Str::words($item->deskripsi, 10, '...') }}
+                </p>
+                <span class="text-xs text-gray-400 block">kapasitas {{ $item->kapasitas }} orang</span>
+
+                <span class="text-xs text-gray-400 block">stok : {{ $item->stok }} tenda</span>
+
+                <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+                    <div>
+                        <span class="text-lg font-bold text-primary">Rp{{ number_format($item->harga) }}</span>
+                        <span class="text-xs text-gray-400 block">per malam</span>
+                    </div>
+                    <a href="{{ route('booking') }}" class="group flex items-center rounded-full bg-primary text-white text-xs font-medium tracking-wide transition-all duration-200 hover:from-teal-700 hover:to-teal-800 px-5 py-2.5">
+                        <span>pesan</span>
+                        <i class="fas fa-chevron-right ml-2 text-[0.65rem] transition-transform duration-200 group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
+
             
         </div>
     </main>

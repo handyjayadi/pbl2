@@ -16,7 +16,7 @@
     <table class="w-full table-auto">
       <thead>
         <tr class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-left">
-          <th class="px-4 py-3">ID</th>
+          <th class="px-4 py-3">No</th>
           <th class="px-4 py-3">Nama</th>
           <th class="px-4 py-3">Foto</th>
           <th class="px-4 py-3">Deskripsi</th>
@@ -25,9 +25,9 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($galeri as $item)
+        @foreach ($galeri as $index => $item)
         <tr class="border-b dark:border-gray-700 text-gray-800 dark:text-gray-300">
-          <td class="px-4 py-2">{{ $index = +1 }}</td>
+          <td class="px-4 py-2">{{ $galeri->firstItem() + $index }}</td>
           <td class="px-4 py-2">{{ $item->nama }}</td>
           <td class="px-4 py-2">
             <img src="{{ asset('storage/' . $item->foto) }}" class="w-16 h-16 object-cover rounded" width="120">
@@ -54,6 +54,9 @@
       </tbody>
     </table>
   </div>
+    <div class="mt-6">
+    {{ $galeri->links('pagination::tailwind') }}
+</div>
 </div>
 
 <!-- Modal Galeri -->

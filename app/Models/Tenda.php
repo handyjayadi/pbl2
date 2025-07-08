@@ -17,5 +17,6 @@ class Tenda extends Model
         'stok',
         'harga',
         'foto',
+        'kapasitas', // Pastikan kolom ini ada di tabel
     ];
 }

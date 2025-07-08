@@ -10,7 +10,7 @@ class AktivitasController extends Controller
 {
     public function index()
     {
-        $aktivitas = Aktivitas::all();
+        $aktivitas = Aktivitas::latest()->paginate(5);
         return view('admin.aktivitasCrud', compact('aktivitas'));
     }
 

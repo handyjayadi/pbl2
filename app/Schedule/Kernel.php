@@ -9,6 +9,6 @@ class Kernel extends ConsoleKernel
 {
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('check:expired-booking')->daily();
+        $schedule->command('check:expired-booking')->everyFourHours();
     }
 }

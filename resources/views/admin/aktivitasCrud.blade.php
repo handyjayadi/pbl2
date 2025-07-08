@@ -24,9 +24,9 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($aktivitas as $item)
+        @foreach ($aktivitas as $index => $item)
           <tr class="border-b dark:border-gray-700 text-gray-800 dark:text-gray-300">
-            <td class="px-4 py-2">{{ $index = +1 }}</td>
+            <td class="px-4 py-2">{{ $aktivitas->firstItem() + $index}}</td>
             <td class="px-4 py-2">{{ $item->name }}</td>
             <td class="px-4 py-2">{{ $item->descaktivitas }}</td>
             <td class="px-4 py-2 flex space-x-2">
@@ -46,6 +46,10 @@
       </tbody>
     </table>
   </div>
+  <div class="mt-6">
+  {{ $aktivitas->links('pagination::tailwind') }}
+</div>
+
 </div>
 
 <!-- Modal Tambah/Edit -->

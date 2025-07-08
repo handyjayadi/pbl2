@@ -137,43 +137,23 @@
 <main class="pt-0 p-8" id="main-content">
     <section class="slider-container">
         <div class="slider-wrapper" id="hero-slider-wrapper">
-            <div class="slider-slide" style="background-image: url('../images/camping-night.jpg');">
+            <div class="slider-slide" style="background-image: url('../images/gngbtr.jpg');">
                 <div class="slider-overlay"></div>
                 <div class="slider-content">
                     <h1 class="text-5xl md:text-6xl font-bold font-hero mb-4 animate-fade-in drop-shadow-md">Abadikan Momen, Rasakan Petualangan</h1>
                     <p class="text-xl md:text-2xl opacity-90 animate-fade-in drop-shadow-md">Temukan keindahan CampHarmoni melalui galeri foto kami dan rencanakan petualangan Anda dengan beragam aktivitas.</p>
                 </div>
-            </div>
-            <div class="slider-slide" style="background-image: url('../images/camping-hero.jpg');">
-                <div class="slider-overlay"></div>
-                <div class="slider-content">
-                    <h1 class="text-5xl md:text-6xl font-bold font-hero mb-4 animate-fade-in drop-shadow-md">Glamping Mewah di Tengah Alam</h1>
-                    <p class="text-xl md:text-2xl opacity-90 animate-fade-in drop-shadow-md">Nikmati kenyamanan bintang lima dengan pemandangan pegunungan yang menakjubkan.</p>
-                </div>
-            </div>
-            <div class="slider-slide" style="background-image: url('../images/camping-view.jpg');">
-                <div class="slider-overlay"></div>
-                <div class="slider-content">
-                    <h1 class="text-5xl md:text-6xl font-bold font-hero mb-4 animate-fade-in drop-shadow-md">Petualangan Menanti Anda!</h1>
-                    <p class="text-xl md:text-2xl opacity-90 animate-fade-in drop-shadow-md">Dari hiking hingga api unggun, buat kenangan tak terlupakan bersama kami.</p>
-                </div>
-            </div>
+            </div>                                                                                  
         </div>
 
-        <button id="prev-slide" class="slider-button left" aria-label="Previous slide">
-            <i class="fas fa-chevron-left text-2xl"></i>
-        </button>
-        <button id="next-slide" class="slider-button right" aria-label="Next slide">
-            <i class="fas fa-chevron-right text-2xl"></i>
-        </button>
-
-        <div id="slider-dots" class="slider-dots"></div>
+        
     </section>
 
     <!-- FILTER & GALERI -->
-    <section class="py-16 bg-white rounded-2xl shadow-xl mt-12 max-w-7xl mx-auto p-8 md:p-12 border border-gray-100">
+     <section class="py-16 bg-white rounded-2xl shadow-xl mt-12 max-w-7xl mx-auto p-8 md:p-12 border border-gray-100">
         <h2 class="text-4xl font-bold font-hero text-dark-text text-center mb-12">Aktivitas Seru di CampHarmoni</h2>
 
+        <!-- Tombol Filter -->
         <div class="flex flex-wrap gap-2 justify-center mb-8">
             <button class="filter-btn bg-primary text-white px-4 py-2 rounded" data-filter="all">Semua</button>
             @foreach ($aktivitas as $kat)
@@ -181,18 +161,23 @@
             @endforeach
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="gallery-grid">
-            @foreach ($galeri as $konten)
-            <div class="gallery-item category-{{ $konten->aktivitas_id }} bg-gray-50 rounded-xl shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
-            <div class="relative w-full h-56">
-                <img src="{{ asset('storage/' . $konten->foto) }}" alt="{{ $konten->nama }}" class="w-full h-full object-cover">
+        <!-- Galeri Scroll Horizontal -->
+        <div class="overflow-x-auto w-full">
+            <div class="flex gap-6 w-max" id="gallery-grid">
+                @foreach ($galeri as $konten)
+                <div class="gallery-item category-{{ $konten->aktivitas_id }} bg-white rounded-xl shadow-md overflow-hidden flex-shrink-0 w-72">
+                    <div class="aspect-[4/3] w-full">
+                        <img src="{{ asset('storage/' . $konten->foto) }}" alt="{{ $konten->nama }}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-dark-text mb-2">{{ $konten->nama }}</h3>
+                        <p class="text-sm text-gray-700">
+                            {{ Str::words($konten->deskripsi, 15, '...') }}
+                        </p>
+                    </div>
+                </div>
+                @endforeach
             </div>
-            <div class="p-4">
-                <h3 class="text-xl font-semibold text-dark-text mb-2">{{ $konten->nama }}</h3>
-                <p class="text-sm text-gray-700">{{ $konten->deskripsi }}</p>
-            </div>
-            </div>
-            @endforeach
         </div>
 
         <div class="text-center mt-12">
@@ -211,6 +196,7 @@
 
         filterButtons.forEach(button => {
             button.addEventListener('click', function () {
+                // Ganti tampilan tombol
                 filterButtons.forEach(btn => {
                     btn.classList.remove('bg-primary', 'text-white');
                     btn.classList.add('bg-gray-200', 'text-gray-800');
@@ -219,60 +205,18 @@
                 this.classList.add('bg-primary', 'text-white');
 
                 const filter = this.dataset.filter;
-
-                galleryGrid.style.opacity = 0;
-                setTimeout(() => {
-                    galleryItems.forEach(item => {
-                        if (filter === 'all' || item.classList.contains('category-' + filter)) {
-                            item.style.display = 'block';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
-                    galleryGrid.style.opacity = 1;
-                }, 300);
+                galleryItems.forEach(item => {
+                    if (filter === 'all' || item.classList.contains('category-' + filter)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
             });
         });
-
-        // Hero slider
-        const sliderWrapper = document.getElementById('hero-slider-wrapper');
-        const slides = document.querySelectorAll('.slider-slide');
-        const prevButton = document.getElementById('prev-slide');
-        const nextButton = document.getElementById('next-slide');
-        const dotsContainer = document.getElementById('slider-dots');
-
-        let currentIndex = 0;
-        const totalSlides = slides.length;
-
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('slider-dot');
-            dot.dataset.index = i;
-            dotsContainer.appendChild(dot);
-            dot.addEventListener('click', () => goToSlide(i));
-        }
-
-        const allDots = document.querySelectorAll('.slider-dot');
-
-        function updateSlider() {
-            const offset = -currentIndex * 100;
-            sliderWrapper.style.transform = `translateX(${offset}%)`;
-
-            allDots.forEach((dot, idx) => {
-                dot.classList.toggle('active', idx === currentIndex);
-            });
-        }
-
-        function goToSlide(index) {
-            currentIndex = (index + totalSlides) % totalSlides;
-            updateSlider();
-        }
-
-        prevButton.addEventListener('click', () => goToSlide(currentIndex - 1));
-        nextButton.addEventListener('click', () => goToSlide(currentIndex + 1));
-
-        updateSlider();
     });
 </script>
+
+
 
 @include('templates.footer')

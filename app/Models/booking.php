@@ -19,11 +19,23 @@ class booking extends Model
         'check_out',
         'total_harga',
         'status',
-        'order_id', // Tambahkan kolom order_id
+        'order_id',
+        'user_id',
+        'expired_at', // Tambahkan kolom order_id
     ];
 
     public function tenda()
     {
         return $this->belongsTo(Tenda::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function ulasan()
+    {
+        return $this->hasOne(Ulasan::class);
+    }
+
 }
