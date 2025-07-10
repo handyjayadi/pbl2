@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Booking;
-use App\Models\Tenda;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Midtrans\Snap;
 use Midtrans\Config;
-use Carbon\Carbon;
+use App\Models\Tenda;
+use App\Models\Booking;
+use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
@@ -81,7 +82,7 @@ class BookingController extends Controller
             'check_out'    => $request->check_out,
             'total_harga'  => $total,
             'status'       => 'pending',
-            'expired_at' => Carbon::now()->addDay(1),
+            'expired_at' => Carbon::now()->addDay(),
         ]);
 
         Config::$serverKey     = config('midtrans.server_key');

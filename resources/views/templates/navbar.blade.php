@@ -53,13 +53,19 @@
                     <!-- Dropdown content -->
                     <div id="userDropdown" class="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-lg py-2 hidden z-50">
                         <a href="{{ route('profile.edit') }}" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
+
                          @if (Auth::check() && (Auth::user()->role === 'admin'))
-                         <a href="{{ route('adminDashboard') }}" class="block px-4 py-2 hover:bg-gray-100">Admin</a>
+                         <a href="{{ route('adminDashboard') }}" class="block px-4 py-2 text-white py-2 bg-blue-300 hover:bg-blue-500">Admin</a>
                          @endif
+
+                         @if (Auth::check() && (Auth::user()->role === 'owner'))
+                         <a href="{{ route('owner.bookings') }}" class="block px-4 text-white py-2 bg-blue-300 hover:bg-blue-500">History Print</a>
+                         @endif
+
                         <!-- Logout form -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="w-full text-left px-4 py-2 text-white bg-red-600">Logout</button>
+                            <button type="submit" class="w-full text-left px-4 py-2 text-white bg-red-300 hover:bg-red-500">Logout</button>
                         </form>
                        
                     </div>

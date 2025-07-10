@@ -1,27 +1,5 @@
 <!-- CHATBOT BUTTON -->
-            <button id="chatbot-toggle" class="fixed bottom-8 right-8 bg-primary text-white p-4 rounded-full shadow-lg hover:bg-primary-dark transition-colors duration-300 z-50 focus:outline-none focus:ring-4 focus:ring-primary focus:ring-opacity-50" aria-label="Buka Chatbot">
-                <i class="fas fa-comments text-2xl"></i>
-            </button>
-
-            <!-- CHATBOT MODAL -->
-            <div id="chatbot-modal" class="fixed bottom-24 right-8 z-[100] hidden">
-                <div class="bg-white rounded-lg shadow-xl w-80 flex flex-col h-[480px] max-h-[600px]">
-                    <div class="flex justify-between items-center bg-primary text-white p-4 rounded-t-lg">
-                        <h3 class="text-xl font-bold">Chatbot CampHarmoni</h3>
-                        <button id="chatbot-close" class="text-white hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-white rounded-full p-1" aria-label="Tutup Chatbot">
-                            <i class="fas fa-times text-xl"></i>
-                        </button>
-                    </div>
-                    <div class="flex-1 p-4 overflow-y-auto text-gray-800" id="chat-messages">
-                    </div>
-                    <div class="p-4 border-t border-gray-200 flex">
-                        <input type="text" id="chat-input" class="flex-1 border border-gray-300 rounded-l-lg p-3 focus:outline-none focus:border-primary" placeholder="Ketik pesan Anda...">
-                        <button id="chat-send" class="bg-primary text-white p-3 rounded-r-lg hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50" aria-label="Kirim Pesan">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+            
             <!-- ACCESSIBILITY BUTTON -->
     <button id="accessibility-toggle" class="fixed bottom-8 left-8 bg-gray-700 text-white p-4 rounded-full shadow-lg hover:bg-gray-800 transition-colors duration-300 z-50 focus:outline-none focus:ring-4 focus:ring-gray-700 focus:ring-opacity-50" aria-label="Pengaturan Aksesibilitas">
         <i class="fas fa-universal-access text-2xl"></i>
@@ -83,26 +61,20 @@
         </div>
     </div>
 
-            <script>
-                // Chatbot toggle
-                document.getElementById('chatbot-toggle').addEventListener('click', function() {
-                    document.getElementById('chatbot-modal').classList.remove('hidden');
-                    document.body.style.overflow = 'hidden';
-                });
-                document.getElementById('chatbot-close').addEventListener('click', function() {
-                    document.getElementById('chatbot-modal').classList.add('hidden');
-                    document.body.style.overflow = '';
-                });
-                // Optional: close modal on click outside
-                document.addEventListener('mousedown', function(e) {
-                    const modal = document.getElementById('chatbot-modal');
-                    const btn = document.getElementById('chatbot-toggle');
-                    if (!modal.classList.contains('hidden') && !modal.contains(e.target) && e.target !== btn) {
-                        modal.classList.add('hidden');
-                        document.body.style.overflow = '';
+            <script type="module">
+                import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
+                Chatbot.init({
+                    chatflowid: "287fc332-22a5-4e77-9606-9d9ecb568f3c",
+                    apiHost: "http://localhost:3000",
+                    theme: {
+                        button: {
+                            backgroundColor: "#9e5336", // warna oranye
+                            iconColor: "#FFFFFF"        // warna ikon putih
+                        }
                     }
-                });
+                })
             </script>
+
 <!-- FOOTER -->
     <footer class="bg-dark-text py-12 md:py-16 text-gray-300 px-4 md:px-0">
         <div class="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">

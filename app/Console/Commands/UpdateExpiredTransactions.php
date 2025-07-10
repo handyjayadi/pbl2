@@ -15,7 +15,7 @@ class UpdateExpiredTransactions extends Command
     public function handle()
     {
         $expiredBookings = Booking::where('status', 'pending')
-            ->where('created_at', '<=', Carbon::now()->subDay(1))
+            ->where('created_at', '<=', Carbon::now()->subDay())
             ->get();
 
         foreach ($expiredBookings as $booking) {

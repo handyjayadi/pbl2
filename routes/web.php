@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\homepageController;
 use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\AktivitasController;
+use App\Http\Controllers\OwnerBookingController;
 
 
 
@@ -89,6 +90,12 @@ Route::middleware(['auth'])->group(function () {
         
     });
     Route::get('/booking', [BookingController::class, 'index'])->name('booking');
+
+    route::middleware(['auth', RoleMiddleware::class . ':owner'])->group(function () {
+       Route::get('/owner/bookings', [OwnerBookingController::class, 'index'])->name('owner.bookings');
+    Route::get('/owner/bookings/pdf', [OwnerBookingController::class, 'downloadPdf'])->name('owner.bookings.pdf');
+    });
+
 
 
     
