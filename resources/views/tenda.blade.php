@@ -34,7 +34,7 @@
            <div class="overflow-x-auto">
     <div class="flex space-x-6 w-max">
         @foreach ($tenda as $item)
-        <div class="accommodation-card min-w-[280px] max-w-xs bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 border border-gray-100 group relative">
+        <div class="accommodation-card min-w-[280px] max-w-xs bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300 border border-gray-100 group relative mb-6">
             <div class="relative">
                 <img src="{{ asset('storage/' . $item->foto) }}" alt="Tenda Deluxe" class="w-full h-64 object-cover group-hover:brightness-95 transition duration-300">
             </div>

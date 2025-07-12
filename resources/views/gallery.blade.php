@@ -165,7 +165,7 @@
         <div class="overflow-x-auto w-full">
             <div class="flex gap-6 w-max" id="gallery-grid">
                 @foreach ($galeri as $konten)
-                <div class="gallery-item category-{{ $konten->aktivitas_id }} bg-white rounded-xl shadow-md overflow-hidden flex-shrink-0 w-72">
+                <div class="gallery-item category-{{ $konten->aktivitas_id }} bg-white rounded-xl shadow-md overflow-hidden flex-shrink-0 w-72 mb-6">
                     <div class="aspect-[4/3] w-full">
                         <img src="{{ asset('storage/' . $konten->foto) }}" alt="{{ $konten->nama }}" class="w-full h-full object-cover">
                     </div>

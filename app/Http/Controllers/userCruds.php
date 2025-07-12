@@ -7,10 +7,23 @@ use Illuminate\Http\Request;
 
 class userCruds extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all(); // atau paginate(10)
-        return view('admin.userCrud', compact('users'));
+        // ✅ Tambahkan filter pencarian
+    
+         $query = User::query();
+
+    if ($request->filled('search')) {
+        $query->where(function ($q) use ($request) {
+            $q->where('name', 'like', '%' . $request->search . '%')
+              ->orWhere('email', 'like', '%' . $request->search . '%');
+        });
+    }
+
+    $users = $query->paginate(5)->withQueryString();
+
+    return view('admin.userCrud', compact('users'));
+
     }
     public function store(Request $request) {
     $validated = $request->validate([

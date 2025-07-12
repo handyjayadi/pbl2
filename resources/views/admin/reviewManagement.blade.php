@@ -3,6 +3,15 @@
 
 <div class="container grid px-6 py-8 mt-8 mx-auto">
   <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">Manajemen Review</h4>
+  <form method="GET" class="flex flex-col md:flex-row items-center gap-3 mb-4">
+    <input type="text" name="search" value="{{ request('search') }}"
+        placeholder="Cari komentar, nama, atau email"
+        class="px-4 py-2 border rounded w-48 mr-4">
+
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        Cari
+    </button>
+</form>
 
   <!-- Tabel Review -->
   <div class="overflow-x-auto bg-white dark:bg-gray-800 rounded-lg shadow">

@@ -28,6 +28,10 @@
  
   </head>
   <body>
+    @php
+    $currentRoute = Route::currentRouteName();
+    @endphp
+
     <div
       class="flex h-screen bg-gray-50 dark:bg-gray-900"
       :class="{ 'overflow-hidden': isSideMenuOpen }"
@@ -45,12 +49,15 @@
           </a>
           <ul class="list-none mt-6  ">
             <li class="relative px-6 py-3 ">
-              <span
-                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                aria-hidden="true"
-              ></span>
+              @if ($currentRoute === 'adminDashboard')
+                <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
+              @endif
               <a
-                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                class="inline-flex items-center w-full text-sm 
+                  @if ($currentRoute === 'adminDashboard')
+                  font-semibold text-gray-800
+                  @endif
+                  font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 href="{{ route('adminDashboard') }}"
               >
                 <svg
@@ -73,8 +80,16 @@
           </ul>
             <ul class="list-none">
               <li class="relative px-6 py-3 ">
+                @if ($currentRoute === 'admin.userManagement')
+                  <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
+                <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
+              @endif
                 <a
-                  class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  class="inline-flex items-center w-full text-sm 
+                  @if ($currentRoute === 'admin.userManagement')
+                  font-semibold text-gray-800
+                  @endif
+                  font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   href="{{ route('admin.userManagement') }}"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
@@ -84,8 +99,16 @@
                 </a>
               </li>
               <li class="relative px-6 py-3 ">
+                 @if ($currentRoute === 'admin.bookManagement')
+                  <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
+                <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
+              @endif
                 <a
-                  class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  class="inline-flex items-center w-full text-sm 
+                  @if ($currentRoute === 'admin.bookManagement')
+                  font-semibold text-gray-800
+                  @endif
+                  font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   href="{{ route('admin.bookManagement') }}"
                 >
                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
@@ -95,16 +118,32 @@
                 </a>
               </li>
               <li class="relative px-6 py-3 ">
+                 @if ($currentRoute === 'tenda.index')
+                  <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
+                <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
+              @endif
                 <a
-                  class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  class="inline-flex items-center w-full text-sm 
+                  @if ($currentRoute === 'tenda.index')
+                  font-semibold text-gray-800
+                  @endif
+                  font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   href="{{ route('tenda.index') }}"
                 >
                   <svg height="16px" width="16px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#6B7280"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#6B7280;} </style> <g> <path class="st0" d="M372.86,79.202l-224.363-11.21L0,360.486l281.875,83.522l4.693-1.909L512,350.764L372.86,79.202z M178.493,383.189l-0.68-2.696l-28.936-113.665l-50.219,92.718l-57.138-16.931l115.906-228.307l105.372,293.876L178.493,383.189z M285.835,411.186L173.617,98.217l181.112,9.057l117.105,228.544L285.835,411.186z"></path> </g> </g></svg>        <span class="ml-4">Tent Management</span>
                 </a>
               </li>
               <li class="relative px-6 py-3 ">
+                 @if ($currentRoute === 'galeri.index')
+                  <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
+                <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
+              @endif
                 <a
-                  class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  class="inline-flex items-center w-full text-sm 
+                  @if ($currentRoute === 'galeri.index')
+                  font-semibold text-gray-800
+                  @endif
+                  font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   href="{{ route('galeri.index') }}"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-image" viewBox="0 0 16 16">
@@ -115,8 +154,16 @@
                 </a>
               </li>
               <li class="relative px-6 py-3 ">
+                 @if ($currentRoute === 'admin.aktivitasManagement')
+                  <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
+                <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
+              @endif
                 <a
-                  class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                 class="inline-flex items-center w-full text-sm 
+                  @if ($currentRoute === 'admin.aktivitasManagement')
+                  font-semibold text-gray-800
+                  @endif
+                  font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   href="{{ route('admin.aktivitasManagement') }}"
                 >
                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
@@ -126,8 +173,19 @@
                 </a>
               </li>
               <li class="relative px-6 py-3 ">
+                 @if ($currentRoute === 'admin.reviewManagement')
+                  <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
+                <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
+              @endif
+              
                 <a
-                  class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                 
+                  class="inline-flex items-center w-full text-sm 
+                  @if ($currentRoute === 'admin.reviewManagement')
+                  font-semibold text-gray-800
+                  @endif
+                  font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  
                   href="{{ route('admin.reviewManagement') }}"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
@@ -136,62 +194,7 @@
                   <span class="ml-4">Review Management</span>
                 </a>
               </li>
-            <li class="relative px-6 py-3">
-              <button
-                class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                @click="togglePagesMenu"
-                aria-haspopup="true"
-              >
-                <span class="inline-flex items-center">
-                  <svg
-                    class="w-5 h-5"
-                    aria-hidden="true"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-                    ></path>
-                  </svg>
-                  <span class="ml-4">Pages</span>
-                </span>
-                <svg
-                  class="w-4 h-4"
-                  aria-hidden="true"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-              <template x-if="isPagesMenuOpen">
-                <ul
-                    x-transition:enter="transition-all ease-in-out duration-300"
-                    x-transition:enter-start="opacity-25 max-h-0"
-                    x-transition:enter-end="opacity-100 max-h-xl"
-                    x-transition:leave="transition-all ease-in-out duration-300"
-                    x-transition:leave-start="opacity-100 max-h-xl"
-                    x-transition:leave-end="opacity-0 max-h-0"
-                    class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
-                    aria-label="submenu"
-                    >
-                    <li
-                        class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                    >
-                        <a class="w-full" href="{{ route('homepage') }}">Dashboard user</a>
-                    </li>
-                       
-                </ul>
-              </template>
-            </li>
+           
           </ul>
          
         </div>

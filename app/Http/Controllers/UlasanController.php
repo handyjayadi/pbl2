@@ -10,15 +10,36 @@ use Illuminate\Support\Facades\Auth;
 class UlasanController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $ulasans = Ulasan::with('booking.user')->latest()->get(); // Pastikan relasi ke user tersedia
-        return view('review', compact('ulasans'));
+         $query = Ulasan::with('user', 'booking');
+
+    if ($request->filled('rating')) {
+        $query->where('rating', $request->rating);
     }
 
-    public function indexadmin()
+    $ulasans = $query->latest()->get();
+
+    return view('review', compact('ulasans'));
+    }
+
+    public function indexadmin(Request $request)
     {
-        $reviews = Ulasan::with('user')->latest()->paginate(5);
+         $query = Ulasan::with(['user', 'booking']);
+
+    if ($request->filled('search')) {
+        $search = $request->search;
+        $query->where(function ($q) use ($search) {
+            $q->where('komentar', 'like', "%$search%")
+              ->orWhereHas('user', function ($q2) use ($search) {
+                  $q2->where('name', 'like', "%$search%")
+                     ->orWhere('email', 'like', "%$search%");
+              });
+        });
+    }
+
+    
+        $reviews = $query->latest()->paginate(5);
         return view('admin.reviewManagement', compact('reviews'));
     }
 

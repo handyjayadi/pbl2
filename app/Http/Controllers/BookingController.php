@@ -33,6 +33,10 @@ class BookingController extends Controller
         if ($request->filled('tanggal')) {
             $query->whereDate('check_in', $request->tanggal);
         }
+        // ✅ Filter status
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
 
         $transaksi = $query->paginate(5)->withQueryString();
 

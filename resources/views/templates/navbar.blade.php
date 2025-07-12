@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="../css/style.css"> 
 </head>
 <body class="font-body">
+    @php
+        $currentRoute = Route::currentRouteName();
+    @endphp
 
     <a href="#main-content" class="skip-link sr-only focus:not-sr-only">Lewati ke Konten Utama</a>
 
@@ -19,28 +22,49 @@
 <!-- NAVBAR -->
     <div class="navbar-container mb-10 pb-10">
         <nav class="flex justify-between items-center text-navbar-text p-4 md:p-0 mb-10 pb-10">
-            <div class="text-2xl md:text-3xl font-bold font-hero tracking-wider">PohonSurgaCamp</div>
+            <div class="text-2xl md:text-3xl font-bold font-hero tracking-wider">Camp Harmoni</div>
             
             <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none" aria-label="Toggle mobile menu">
                 <i class="fas fa-bars text-2xl"></i>
             </button>
             
-            <div class="hidden md:flex gap-6 md:gap-10 items-center">
-                <a href="{{route('homepage')}}" class="nav-link transition duration-300">Beranda</a> 
-                <a href="{{route('booking')}}" class="nav-link transition duration-300">Pesan</a>
-                <a href="{{route('tenda.user')}}" class="nav-link transition duration-300">Tenda</a>
-                <a href="{{route('gallery')}}" class="nav-link transition duration-300">Gallery</a>
-                <a href="{{ route('review') }}" class="nav-link transition duration-300">Ulasan</a>
-                <a href="{{route('about')}}" class="nav-link transition duration-300">Tentang Kami</a>
-                @auth
-                <a href="{{route('booking.history')}}" class="nav-link transition duration-300">History Pesanan</a>
-                @endauth
-            </div>
-            @guest
-            <a href="{{route('login')}}" class="hidden md:block bg-primary hover:bg-primary-dark text-white px-6 py-2 md:px-8 md:py-3 rounded-full font-medium tracking-wide transition-all duration-300 transform hover:scale-105 shadow-lg">
-                Sign up
+           <a href="{{route('homepage')}}"
+            class="nav-link transition duration-300 {{ $currentRoute === 'homepage' ? 'font-semibold text-primary border-b-2 border-primary pb-1' : '' }}">
+            Beranda
             </a>
-            @endguest
+
+            <a href="{{route('booking')}}"
+            class="nav-link transition duration-300 {{ $currentRoute === 'booking' ? 'font-semibold text-primary border-b-2 border-primary pb-1' : '' }}">
+            Pesan
+            </a>
+
+            <a href="{{route('tenda.user')}}"
+            class="nav-link transition duration-300 {{ $currentRoute === 'tenda.user' ? 'font-semibold text-primary border-b-2 border-primary pb-1' : '' }}">
+            Tenda
+            </a>
+
+            <a href="{{route('gallery')}}"
+            class="nav-link transition duration-300 {{ $currentRoute === 'gallery' ? 'font-semibold text-primary border-b-2 border-primary pb-1' : '' }}">
+            Gallery
+            </a>
+
+            <a href="{{route('review')}}"
+            class="nav-link transition duration-300 {{ $currentRoute === 'review' ? 'font-semibold text-primary border-b-2 border-primary pb-1' : '' }}">
+            Ulasan
+            </a>
+
+            <a href="{{route('about')}}"
+            class="nav-link transition duration-300 {{ $currentRoute === 'about' ? 'font-semibold text-primary border-b-2 border-primary pb-1' : '' }}">
+            Tentang Kami
+            </a>
+
+            @auth
+            <a href="{{route('booking.history')}}"
+            class="nav-link transition duration-300 {{ $currentRoute === 'booking.history' ? 'font-semibold text-primary border-b-2 border-primary pb-1' : '' }}">
+            History Pesanan
+            </a>
+            @endauth
+
 
             @auth
     <!-- Dropdown user untuk user yang login -->
@@ -55,17 +79,17 @@
                         <a href="{{ route('profile.edit') }}" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
 
                          @if (Auth::check() && (Auth::user()->role === 'admin'))
-                         <a href="{{ route('adminDashboard') }}" class="block px-4 py-2 text-white py-2 bg-blue-300 hover:bg-blue-500">Admin</a>
+                         <a href="{{ route('adminDashboard') }}" class="block px-4 py-2 text-white py-2 bg-blue-500 hover:bg-blue-400">Admin</a>
                          @endif
 
                          @if (Auth::check() && (Auth::user()->role === 'owner'))
-                         <a href="{{ route('owner.bookings') }}" class="block px-4 text-white py-2 bg-blue-300 hover:bg-blue-500">History Print</a>
+                         <a href="{{ route('owner.bookings') }}" class="block px-4 text-white py-2 bg-blue-500 hover:bg-blue-400">History Print</a>
                          @endif
 
                         <!-- Logout form -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="w-full text-left px-4 py-2 text-white bg-red-300 hover:bg-red-500">Logout</button>
+                            <button type="submit" class="w-full text-left px-4 py-2 text-white bg-red-500 hover:bg-red-400">Logout</button>
                         </form>
                        
                     </div>

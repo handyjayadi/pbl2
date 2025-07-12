@@ -3,6 +3,27 @@
 
 <div class="container grid px-6 py-8 mt-8 mx-auto">
   <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">Manajemen User</h4>
+  <form method="GET" class="mb-4 p-5 flex gap-2 flex-wrap items-center">
+  <input
+    type="text"
+    name="search"
+    value="{{ request('search') }}"
+    placeholder="Cari nama atau email..."
+    class="w-48 px-4 py-2 border rounded shadow-sm focus:outline-none focus:ring focus:border-blue-300 "
+  >
+  
+  <button type="submit" class="px-4 py-2 ml-4 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+    Cari
+  </button>
+
+  @if(request('search'))
+  <a href="{{ route('admin.userManagement') }}"
+    class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition">
+    Reset
+  </a>
+  @endif
+</form>
+
 
   <!-- Tombol Tambah -->
   <div class="flex justify-end mb-4">
@@ -24,9 +45,9 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($users as $user)
+        @foreach ($users as $index => $user)
         <tr class="border-b dark:border-gray-700 text-gray-800 dark:text-gray-300">
-          <td class="px-4 py-2">{{ $loop->iteration }}</td>
+          <td class="px-4 py-2">{{$users->firstItem() + $loop->index }}</td>
           <td class="px-4 py-2">{{ $user->name }}</td>
           <td class="px-4 py-2">{{ $user->email }}</td>
           <td class="px-4 py-2">{{ $user->role }}</td>
@@ -47,6 +68,13 @@
       </tbody>
     </table>
   </div>
+  <div class="p-5">
+    {{-- Konten user management --}}
+    <div class="mt-4">
+      {{ $users->links() }}
+    </div>
+</div>
+
 </div>
 
 <!-- Modal Tambah/Edit -->

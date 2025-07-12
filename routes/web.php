@@ -8,6 +8,7 @@ use App\Http\Controllers\TendaController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\homepageController;
 use App\Http\Controllers\MidtransController;
@@ -85,6 +86,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/booking/history', [BookingController::class, 'history'])->name('booking.history');
     Route::post('/get-snap-token', [BookingController::class, 'getSnapToken']);
     Route::get('/admin/transaksi', [BookingController::class, 'admin'])->name('admin.bookManagement');
+    Route::get('/booking/invoice/{id}', [InvoiceController::class, 'download'])
+    ->name('booking.invoice');
 
 
         

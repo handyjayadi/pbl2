@@ -27,7 +27,8 @@
             </div>
 
             <div class="mb-4">
-                <p><strong>Jumlah:</strong> {{ $booking->jumlah }} orang</p>
+                <p><strong>Nama:</strong> {{ $booking->nama }} tenda</p>
+                <p><strong>Jumlah:</strong> {{ $booking->jumlah }} tenda</p>
                 <p><strong>Total:</strong> Rp{{ number_format($booking->total_harga, 0, ',', '.') }}</p>
                 <p>
                    <strong>Status:</strong>
@@ -40,6 +41,13 @@
                     @endif
 
                 </p>
+                @if ($booking->status === 'paid')
+                    <a href="{{ route('booking.invoice', $booking->id) }}"
+                    class="bg-gray-800 text-white px-4 py-2 rounded mt-2 inline-block hover:bg-black transition">
+                    Print Invoice
+                    </a>
+                @endif
+
                 @if ($booking->status === 'paid' && !$booking->ulasan)
                     <button
                         onclick="openModal({{ $booking->id }})"

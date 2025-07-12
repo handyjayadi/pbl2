@@ -12,11 +12,19 @@
     <input type="date" name="tanggal" value="{{ request('tanggal') }}"
       class="px-4 py-2 border rounded-md mr-2" />
 
+       <select name="status" class="px-4 py-2 mr-2 border rounded shadow-sm">
+        <option value="">-- Semua Status --</option>
+        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+        <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>Lunas</option>
+        <option value="failed" {{ request('status') == 'failed' ? 'selected' : '' }}>Expired</option>
+      </select>
+
     <button type="submit" class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 mr-2">
       Filter
     </button>
     <a href="{{ route('admin.bookManagement') }}" class="px-4 py-2 border rounded-md mr-2 bg-purple-600 text-white">Reset</a>
   </form>
+
 
   <!-- Tabel -->
   <div class="overflow-x-auto bg-white dark:bg-gray-800 rounded-lg shadow">

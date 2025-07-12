@@ -5,6 +5,19 @@
                 <h2 class="text-3xl font-bold font-hero text-dark-text text-center mb-2">Ulasan dari Pengunjung Kami</h2>
                 <p class="text-xl opacity-90 animate-fade-in text-center mb-10">Dengar langsung pengalaman tak terlupakan dari mereka yang telah berkemah bersama kami.</p>
                 
+                <form method="GET" class="mb-4 p-5 flex gap-2 items-center">
+                <label for="rating" class="text-gray-700">Filter Bintang:</label>
+                <select name="rating" id="rating" onchange="this.form.submit()"
+                    class="px-3 py-2 border rounded">
+                    <option value="">Semua</option>
+                    @for ($i = 5; $i >= 1; $i--)
+                    <option value="{{ $i }}" {{ request('rating') == $i ? 'selected' : '' }}>
+                        {{ $i }} Bintang
+                    </option>
+                    @endfor
+                </select>
+                </form>
+
             @foreach ($ulasans as $index => $ulasan)
                 <div class="review-item review-card bg-white mt-4 p-8 rounded-xl shadow-lg text-left hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 {{ $index >= 2 ? 'hidden' : '' }}">
                     <div class="flex items-center mb-4">
