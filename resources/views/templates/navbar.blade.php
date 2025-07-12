@@ -65,6 +65,12 @@
             </a>
             @endauth
 
+            @guest
+            <a href="{{route('login')}}" class="hidden md:block bg-primary hover:bg-primary-dark text-white px-6 py-2 md:px-8 md:py-3 rounded-full font-medium tracking-wide transition-all duration-300 transform hover:scale-105 shadow-lg">
+                Sign In
+            </a>
+            @endguest
+
 
             @auth
     <!-- Dropdown user untuk user yang login -->
